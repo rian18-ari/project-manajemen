@@ -30,12 +30,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome')->name('home');
 Route::get('/main', Main::class)->name('main');
-Route::get('/project', ProjectList::class)->name('project')->middleware('role:admin');
-Route::get('/projectCreate', ProjectCreate::class)->name('project.create')->middleware('role:admin');
-Route::get('/projectDetails/{id}', Project::class)->name('project.show')->middleware('role:admin');
-Route::get('/projectDetails/{id}/addtask', TaskAdd::class)->name('task.add')->middleware('role:admin');
-Route::get('/profile', Profile::class)->name('profile')->middleware('role:admin');
-Route::get('/projectNotCompleted', ProjectCompleted::class)->name('project.not-completed')->middleware('role:admin');
+Route::get('/project', ProjectList::class)->name('project');
+Route::get('/projectCreate', ProjectCreate::class)->name('project.create');
+Route::get('/project/{id}', Project::class)->name('project.show');
+Route::get('/project/{id}/addtask', TaskAdd::class)->name('task.add');
+Route::get('/profile', Profile::class)->name('profile');
+Route::get('/projectNotCompleted', ProjectCompleted::class)->name('project.not-completed');
 
 Route::middleware('guest')->group(function () {
     Route::get('login', Login::class)

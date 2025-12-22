@@ -30,11 +30,11 @@ class ProjectCreate extends Component
             'color.required' => 'Please enter a color',
         ]);
         
-        // $userId = Auth::user()->id;
+        $userId = Auth::user()->id;
 
         // dd($this->all());
         Project::create([
-            'user_id' => 1,
+            'user_id' => $userId,
             'title' => $this->title,
             'description' => $this->description,
             'start_date' => $this->start_date,

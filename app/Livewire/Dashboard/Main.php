@@ -16,7 +16,7 @@ class Main extends Component
             'projects' => Project::all()->count(),
             'completedProjects' => Project::where('is_completed', true)->count(),
             'notCompletedProjects' => Project::where('is_completed', false)->count(),
-            'tasks' => Project::whereMonth('end_date', $date->month)->get(),
+            'tasks' => Project::whereMonth('end_date', $date->month)->where('is_completed', false)->get(),
         ])->extends('layouts.app');
     }
 }

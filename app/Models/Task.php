@@ -24,9 +24,4 @@ class Task extends Model
     {
         return $this->belongsTo(Project::class);
     }
-
-    public function label()
-    {
-        return $this->belongsToMany(Label::class);
-    }
 }
