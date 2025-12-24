@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 
 class RoleMiddleware
@@ -17,9 +18,10 @@ class RoleMiddleware
     {
         $user = $request->user();
 
-         if (!$user || !in_array($user->role, $roles)){
-            abort(403, 'unathorized');
-         }
+        if(Gate::denies('check_roles',$user, $roles)){
+            abort(403, 'you dont have an access to this page');
+        }
         return $next($request);
+
     }
 }

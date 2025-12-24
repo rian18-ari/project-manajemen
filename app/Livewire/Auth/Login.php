@@ -31,10 +31,7 @@ class Login extends Component
             return;
         }
 
-        if (Auth::user()->role == 'owner') {
-            return redirect()->intended(route('owner.dashboard'));
-        }
-        return redirect()->intended(route('home'));
+        return redirect()->intended(route('main'));
     }
 
     public function render()

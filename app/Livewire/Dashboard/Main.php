@@ -3,20 +3,36 @@
 namespace App\Livewire\Dashboard;
 
 use App\Models\Project;
+use App\Models\project_user;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
 class Main extends Component
 {
     public function render()
     {
-        $date = Carbon::now();
+        $month = Carbon::now()->month;
+        
+        $ids = Auth::user()->id;
+        $projectIds = project_user::where('user_id', $ids)->pluck('project_id');
+        $query = Project::whereIn('id', $projectIds);
+
+        if(Auth::user()->role === 'owner'){
+            $query = Project::query();
+        }
+
+        $projects = (clone $query)->count();
+        $completedProjects = (clone $query)->where('is_completed', true)->count();
+        $notCompletedProjects = (clone $query)->where('is_completed', false)->count();
+        $tasks = (clone $query)->whereMonth('end_date', $month)->where('is_completed', false)->get();
         
         return view('livewire.dashboard.main', [
-            'projects' => Project::all()->count(),
-            'completedProjects' => Project::where('is_completed', true)->count(),
-            'notCompletedProjects' => Project::where('is_completed', false)->count(),
-            'tasks' => Project::whereMonth('end_date', $date->month)->where('is_completed', false)->get(),
+            'projects' => $projects,
+            'completedProjects' => $completedProjects,
+            'notCompletedProjects' => $notCompletedProjects,
+            'tasks' => $tasks,
         ])->extends('layouts.app');
     }
 }

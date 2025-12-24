@@ -20,17 +20,13 @@
 
         <!-- Navigation Links -->
         <nav class="flex flex-col gap-10 px-4 py-6 space-y-2">
-            <a href="{{ route('main') }}"
+            <a wire:navigate href="{{ route('main') }}"
                 class="nav-link {{ request()->routeIs('main') ? 'active text-gray-600' : '' }}">
                 <i class="fa-solid fa-house"></i>
             </a>
-            <a href="{{ route('project') }}"
+            <a wire:navigate href="{{ route('project') }}"
                 class="nav-link {{ request()->routeIs('project') ? 'active text-gray-600' : '' }}">
                 <i class="fa-regular fa-circle-check"></i>
-            </a>
-            <a href="{{ route('profile') }}"
-                class="nav-link {{ request()->routeIs('profile') ? 'active text-gray-600' : '' }}">
-                <i class="fa-solid fa-user"></i>
             </a>
             <a href="#">
                 <i class="fa-solid fa-gear"></i>
