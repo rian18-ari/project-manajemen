@@ -18,7 +18,7 @@ class RoleMiddleware
     {
         $user = $request->user();
 
-        if(Gate::denies('check_roles',$user, $roles)){
+        if(Gate::denies('check_roles', [$roles])){
             abort(403, 'you dont have an access to this page');
         }
         return $next($request);

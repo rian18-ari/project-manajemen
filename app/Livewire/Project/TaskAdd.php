@@ -3,6 +3,7 @@
 namespace App\Livewire\Project;
 
 use App\Models\Task;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use SweetAlert2\Laravel\Traits\WithSweetAlert;
 
@@ -29,7 +30,7 @@ class TaskAdd extends Component
 
         Task::create([
             'project_id' => $this->projectId,
-            'user_id' => 1,
+            'user_id' => Auth::user()->id,
             'title' => $this->title,
             'description' => $this->description,
         ]);

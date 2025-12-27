@@ -5,7 +5,7 @@
         <a wire:navigate href="{{ route('project.not-completed') }}" class=" lg:w-1/2 w-full text-center rounded-xl h-full nav-link {{ request()->routeIs('project.not-completed') ? 'active bg-gray-800 text-white' : ''}}">Completed</a>
     </div>
     <section class="grid lg:grid-cols-4 grid-cols-1 lg:grid-flow-row grid-flow-col gap-6">
-        @foreach ($projects as $project)
+        @forelse ($projects as $project)
         <div class="w-60 h-80 p-6 rounded-xl shadow-lg border-2 border-gray-200 flex flex-col justify-center items-center align-middle" style="background-color: {{ $project->color }}">
             <h2 class="text-xl font-semibold text-gray-800">{{ $project->title }}</h2>
             <div class="rounded-xl items-center align-middle justify-center flex w-12 h-12 bg-gray-200 p-2 ring-2 ring-gray-200 mt-10">
@@ -16,15 +16,13 @@
                 <button wire:click.prevent="delete({{ $projectId = $project->id }})"><i class="fa-solid fa-trash hover:text-white"></i></button>
             </div>
         </div>
-        @endforeach
-        <div class="w-60 h-80 bg-white p-6 rounded-xl shadow-lg border-2 border-gray-200 flex flex-col justify-center items-center align-middle">
-            <div class="m-2">
-                <a href="{{ route('project.create') }}" class="rounded-xl items-center align-middle justify-center flex w-auto h-12 bg-gray-200 p-2 ring-2 ring-gray-200">
-                    <h1 class="text-xl font-semibold text-gray-800">project</h1>
-                    <i class="fa-solid fa-plus"></i>
-                </a>
+        @empty
+            <div class="w-60 h-80 bg-white p-6 rounded-xl shadow-lg border-2 border-gray-200 flex flex-col justify-center items-center align-middle">
+                <div class="m-2">
+                    <h1>you havent finished any projects</h1>
+                </div>
             </div>
-            
-        </div>
+        @endforelse
+
     </section>
 </div>

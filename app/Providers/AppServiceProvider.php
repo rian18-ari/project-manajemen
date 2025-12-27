@@ -27,8 +27,8 @@ class AppServiceProvider extends ServiceProvider
             }
         });
 
-        Gate::define('check_roles', function($user, ...$roles){
-            return in_array($user->role, $roles);
+        Gate::define('check_roles', function($user, $roles){
+            return in_array($user->role, (array) $roles);
         });
     }
 }

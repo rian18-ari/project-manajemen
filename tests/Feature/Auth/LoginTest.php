@@ -8,6 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Livewire;
+use Symfony\Component\Routing\Route;
 use Tests\TestCase;
 
 class LoginTest extends TestCase
@@ -18,7 +19,7 @@ class LoginTest extends TestCase
     public function can_view_login_page()
     {
         $this->get(route('login'))
-            ->assertSuccessful()
+            ->assertSuccessful(route('/main'))
             ->assertSeeLivewire(Login::class);
     }
 
@@ -30,7 +31,7 @@ class LoginTest extends TestCase
         $this->be($user);
 
         $this->get(route('login'))
-            ->assertRedirect(route('home'));
+            ->assertRedirect(route('/main'));
     }
 
     /** @test */
@@ -55,7 +56,7 @@ class LoginTest extends TestCase
             ->set('email', $user->email)
             ->set('password', 'password')
             ->call('authenticate')
-            ->assertRedirect(route('home'));
+            ->assertRedirect(route('/main'));
     }
 
     /** @test */

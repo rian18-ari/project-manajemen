@@ -30,12 +30,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome')->name('home');
 Route::get('/main', Main::class)->name('main');
-Route::get('/project', ProjectList::class)->name('project')->middleware('role:owner');
-Route::get('/projectCreate', ProjectCreate::class)->name('project.create')->middleware('role:owner');
-Route::get('/project/{id}', Project::class)->name('project.show')->middleware('role:owner');
-Route::get('/project/{id}/addtask', TaskAdd::class)->name('task.add')->middleware('role:owner');
-Route::get('/projectNotCompleted', ProjectCompleted::class)->name('project.not-completed')->middleware('role:owner');
-Route::get('/member', MemberMain::class)->name('member')->middleware('role:owner');
+Route::get('/project', ProjectList::class)->name('project')->middleware('auth', 'role:owner,member');
+Route::get('/projectCreate', ProjectCreate::class)->name('project.create')->middleware('auth', 'role:owner,member');
+Route::get('/project/{id}', Project::class)->name('project.show')->middleware('auth', 'role:owner,member');
+Route::get('/project/{id}/addtask', TaskAdd::class)->name('task.add')->middleware('auth', 'role:owner,member');
+Route::get('/projectNotCompleted', ProjectCompleted::class)->name('project.not-completed')->middleware('auth', 'role:owner,member');
+Route::get('/member', MemberMain::class)->name('member')->middleware('role:owner,member');
 
 Route::middleware('guest')->group(function () {
     Route::get('login', Login::class)
