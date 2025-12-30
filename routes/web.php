@@ -15,6 +15,7 @@ use App\Livewire\Project\ProjectCompleted;
 use App\Livewire\Project\ProjectCreate;
 use App\Livewire\Project\ProjectList;
 use App\Livewire\Project\TaskAdd;
+use App\Livewire\Setting\SettingMenu;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,11 +32,12 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'welcome')->name('home');
 Route::get('/main', Main::class)->name('main');
 Route::get('/project', ProjectList::class)->name('project')->middleware('auth', 'role:owner,member');
-Route::get('/projectCreate', ProjectCreate::class)->name('project.create')->middleware('auth', 'role:owner,member');
+Route::get('/project/create', ProjectCreate::class)->name('project.create')->middleware('auth', 'role:owner,member');
 Route::get('/project/{id}', Project::class)->name('project.show')->middleware('auth', 'role:owner,member');
 Route::get('/project/{id}/addtask', TaskAdd::class)->name('task.add')->middleware('auth', 'role:owner,member');
 Route::get('/projectNotCompleted', ProjectCompleted::class)->name('project.not-completed')->middleware('auth', 'role:owner,member');
 Route::get('/member', MemberMain::class)->name('member')->middleware('role:owner,member');
+Route::get('/setting', SettingMenu::class)->name('setting')->middleware('role:owner,member');
 
 Route::middleware('guest')->group(function () {
     Route::get('login', Login::class)

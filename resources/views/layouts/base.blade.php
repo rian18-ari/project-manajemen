@@ -16,19 +16,20 @@
 
     <!-- Sidebar / Navigation -->
     <aside id="sidebar"
-        class="fixed w-16 inset-y-0 left-0 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out bg-gray-800 text-white flex flex-col z-40 shadow-xl overflow-y-auto">
+        class="fixed w-16 inset-y-0 left-0 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out bg-gray-800 text-gray-500 flex flex-col z-40 shadow-xl overflow-y-auto">
 
         <!-- Navigation Links -->
-        <nav class="flex flex-col gap-10 px-4 py-6 space-y-2">
+        <nav class="flex justify-center flex-col gap-10 px-4 py-6 space-y-2">
             <a wire:navigate href="{{ route('main') }}"
-                class="nav-link {{ request()->routeIs('main') ? 'active text-gray-600' : '' }}">
+                class="flex w-9 h-9 items-center justify-center rounded-lg text-lg nav-link {{ request()->routeIs('main') ? 'active bg-white text-gray-800' : '' }}">
                 <i class="fa-solid fa-house"></i>
             </a>
             <a wire:navigate href="{{ route('project') }}"
-                class="nav-link {{ request()->routeIs('project') ? 'active text-gray-600' : '' }}">
+                class="flex w-9 h-9 items-center justify-center rounded-lg text-lg nav-link {{ request()->routeIs('project*') ? 'active bg-white text-gray-800' : '' }}">
                 <i class="fa-regular fa-circle-check"></i>
             </a>
-            <a href="#">
+            <a wire:navigate href="{{ route('setting') }}"
+                class="flex w-9 h-9 items-center justify-center rounded-lg text-lg nav-link {{ request()->routeIs('setting') ? 'active bg-white text-gray-800' : '' }}">
                 <i class="fa-solid fa-gear"></i>
             </a>
         </nav>
